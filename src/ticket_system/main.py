@@ -1,11 +1,9 @@
 import ollama
 import json
-from enum import Enum
-from pydantic import BaseModel
 from pathlib import Path
 
 from ticket_system.models import (
-    classificationOutput
+    ClassificationOutput
 )
 
 model_name = "llama3.2:1b"
@@ -15,8 +13,9 @@ with sample_data_path.open("r", encoding="utf-8") as file:
     sample_data = json.load(file)
 
 system_prompt = """
-    You are an automated ticket triage classifier.
-    Analyze the user's ticket text and classify them as either HIGH, MEDIUM or LOW priority
+You are an enterprise ticket triage classifier.
+Analyze the provided ticket text and extract the department & urgency.
+Adhere strictly to the requested schema.
 """
 
 for ticket in sample_data:
@@ -35,7 +34,7 @@ for ticket in sample_data:
     response = ollama.chat(
         model=model_name, 
         messages=messages,
-        format=classificationOutput.model_json_schema()
+        format=ClassificationOutput.model_json_schema()
     )
 
     print ("----------------------------------")
