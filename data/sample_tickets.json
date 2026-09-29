@@ -1,0 +1,14 @@
+[
+  {
+    "id": "TCK-001",
+    "text": "EMERGENCY: The main API database is throwing 504 gateway timeouts. All European checkout services are completely down for customers."
+  },
+  {
+    "id": "TCK-002",
+    "text": "Hello, I noticed I was charged twice for invoice #9402 on my credit card this morning. Can someone please process a refund for the extra charge?"
+  },
+  {
+    "id": "TCK-003",
+    "text": "Hi there, where in the dashboard settings can I change my profile email address and enable dark mode?"
+  }
+]

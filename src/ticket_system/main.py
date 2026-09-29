@@ -1,7 +1,18 @@
-from fastapi import FastAPI
+import ollama
 
-app = FastAPI()
+model_name = "llama3.2:1b"
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+messages = [
+    {
+        "role": "system", 
+        "content": "You are a helpful assistant."
+    },
+    {
+        "role": "user", 
+        "content": "Hello!"
+    },
+]
+
+response = ollama.chat(model=model_name, messages=messages)
+print("Bot:", response.message.content)
+
