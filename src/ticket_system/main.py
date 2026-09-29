@@ -8,19 +8,30 @@ sample_data_path = Path("data/sample_tickets.json")
 with sample_data_path.open("r", encoding="utf-8") as file:
     sample_data = json.load(file)
 
-print (sample_data)
+system_prompt = """
+    You are an automated ticket triage classifier.
+    Analyze the user's ticket text and classify them as either HIGH, MEDIUM or LOW priority
+"""
 
-# messages = [
-#     {
-#         "role": "system", 
-#         "content": "You are a helpful assistant."
-#     },
-#     {
-#         "role": "user", 
-#         "content": "Hello!"
-#     },
-# ]
+for ticket in sample_data:
 
-# response = ollama.chat(model=model_name, messages=messages)
-# print("Bot:", response.message.content)
+    messages = [
+        {
+            "role": "system", 
+            "content": system_prompt
+        },
+        {
+            "role": "user", 
+            "content": ticket['text']
+        },
+    ]
+
+    response = ollama.chat(
+        model=model_name, 
+        messages=messages
+    )
+
+    print ("----------------------------------")
+    print("Response:", response.message.content)
+    print ("----------------------------------")
 
