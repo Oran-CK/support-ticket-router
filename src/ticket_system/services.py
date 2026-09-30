@@ -30,7 +30,7 @@ def classify_ticket(ticket: str):
         validated_output = ClassificationOutput.model_validate_json(response)
         return validated_output.model_dump(mode='json')
     except Exception as e:
-        print(f"Failed to validate model output: {e}")
+        print(f"\n\n--------\n\nFailed to validate model output: {e}\n\n------\n\n")
         return None
 
 
