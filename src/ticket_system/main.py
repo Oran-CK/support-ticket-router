@@ -34,8 +34,8 @@ def classify_ticket(ticket: str):
     response = response.message.content
 
     try:
-        ClassificationOutput.model_validate_json(response)
-        return response
+        validated_output = ClassificationOutput.model_validate_json(response)
+        return validated_output.model_dump(mode='json')
     except Exception as e:
         print(f"Failed to validate model output: {e}")
         return None
@@ -47,7 +47,7 @@ def run_classification():
     
     for ticket in sample_data:
         classification = classify_ticket(ticket["text"])
-        
+
         results.append(
             {
                 "id": ticket["id"],
@@ -60,7 +60,8 @@ def run_classification():
 if __name__ == "__main__":
     results = run_classification()
 
-    print(results)
+    for r in results:
+        print (r)
 
 
 
