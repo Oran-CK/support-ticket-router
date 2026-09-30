@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 
 from ticket_system.models import (
     classificationRequest,
@@ -18,5 +18,4 @@ def classify_ticket_endpoint(payload: classificationRequest):
             urgency=classification['urgency']
         )
     except Exception as e:
-            print(f"\n\n--------\n\napi error {e}\n\n------\n\n")
-            return None
+            raise HTTPException(status_code=502, detail="Failed to classify ticket")
