@@ -1,17 +1,9 @@
-from enum import Enum
 from pydantic import BaseModel, Field
 
-class Department(str, Enum):
-    INFRASTRUCTURE = "Infrastructure"
-    BILLING = "Billing"
-    SECURITY = "Security"
-    SUPPORT = "Support"
-
-class Urgency(str, Enum):
-    LOW = "LOW"
-    MEDIUM = "MEDIUM"
-    HIGH = "HIGH"
-    CRITICAL = "CRITICAL"
+from ticket_system.models.enum import (
+    Department,
+    Urgency
+)
 
 class ClassificationOutput(BaseModel):
     department: Department = Field(
