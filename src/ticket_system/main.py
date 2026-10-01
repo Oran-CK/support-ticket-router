@@ -9,7 +9,11 @@ from ticket_system.services import (
     ServiceError
 )
 
-app = FastAPI()
+app = FastAPI(
+    title="ticket_system",
+    version="0.1",
+    description="LLM powered support ticket department and urgency classify"
+)
 
 @app.get("/health")
 def api_health():
