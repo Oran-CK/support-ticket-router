@@ -1,6 +1,6 @@
 # Support Ticket Router / ticket_system
 
-FastAPI API for classififying support tickets based on urgency and department using an llm.
+FastAPI service for classifying support tickets by urgency and department using a local LLM.
 
 ## Prerequisites
 - [uv](https://docs.astral.sh/uv/) (Python package manager)
