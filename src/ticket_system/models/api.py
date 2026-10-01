@@ -1,10 +1,10 @@
 from pydantic import BaseModel
 
-class classificationRequest(BaseModel):
+class ClassificationRequest(BaseModel):
     ticket_id: str
     text: str
 
-class classificationResponse(BaseModel):
+class ClassificationResponse(BaseModel):
     ticket_id: str
     urgency: str
     department: str
