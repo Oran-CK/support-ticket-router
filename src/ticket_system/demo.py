@@ -1,30 +1,35 @@
 import json
 from pathlib import Path
+from fastapi.testclient import TestClient
+from ticket_system.main import app
+
+client = TestClient(app)
 
 def load_data():
     sample_data_path = Path("data/sample_tickets.json")
     with sample_data_path.open("r", encoding="utf-8") as file:
         return json.load(file)
 
-# def run_classification():
+def run_demo():
 
-#     sample_data = load_data()
-#     results = []
+    sample_data = load_data()
+    results = []
     
-#     for ticket in sample_data:
-#         classification = classify_ticket(ticket["text"])
+    for ticket in sample_data:
 
-#         results.append(
-#             {
-#                 "id": ticket["id"],
-#                 "classification": classification,
-#             }
-#         )
+        payload = {
+            "ticket_id": ticket["id"],
+            "text": ticket["text"]
+        }
 
-#     return results
+        response = client.post("/ticket/classify", json=payload)
 
-# if __name__ == "__main__":
-#     results = run_classification()
+        print(f"\nStatus Code: {response.status_code}")
+        if response.status_code == 200:
+            print("Response:", response.json())
+        else:
+            print("Error:", response.text)
+        print("-" * 40)
 
-#     for r in results:
-#         print (r)
+if __name__ == "__main__":
+    run_demo()
