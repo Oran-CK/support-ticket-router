@@ -35,3 +35,9 @@ def test_classify_endpoint_service_error():
         
         assert response.status_code == 502
         assert "LLM offline" in response.json()["detail"]
+
+def test_classify_endpoint_validation_error():
+    # Missing 'text' field
+    payload = {"ticket_id": "TCK-102"}
+    response = client.post("/ticket/classify", json=payload)
+    assert response.status_code == 422
