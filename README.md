@@ -15,6 +15,8 @@ FastAPI API for classififying support tickets based on urgency and department us
 
 ## Running the application
 
+Run the following commands within the root directory of the project
+
 1. `uv sync`
 2. `uv run fastapi dev src/ticket_system/main.py`
 3. `uv run python -m ticket_system.demo`
