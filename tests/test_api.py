@@ -3,6 +3,7 @@ from fastapi.testclient import TestClient
 from ticket_system.main import app
 from ticket_system.models.enum import Department, Urgency
 from ticket_system.models.llm import ClassificationOutput
+from ticket_system.services import ServiceError
 
 client = TestClient(app)
 
@@ -26,3 +27,11 @@ def test_classify_endpoint_success():
         assert data["ticket_id"] == "TCK-100"
         assert data["department"] == "Billing"
         assert data["urgency"] == "HIGH"
+
+def test_classify_endpoint_service_error():
+    with patch("ticket_system.main.classify_ticket", side_effect=ServiceError("LLM offline", "error")):
+        payload = {"ticket_id": "TCK-101", "text": "Database error"}
+        response = client.post("/ticket/classify", json=payload)
+        
+        assert response.status_code == 502
+        assert "LLM offline" in response.json()["detail"]
