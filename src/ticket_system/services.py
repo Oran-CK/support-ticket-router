@@ -1,3 +1,4 @@
+from typing import Union
 import ollama
 
 from ticket_system.models import (
@@ -7,7 +8,7 @@ from ticket_system.models import (
 model_name = "llama3.2:1b"
 
 class ServiceError(Exception):
-    def __init__(self, message: str, error: str):
+    def __init__(self, message: str, error: Union[str, Exception]):
         super().__init__(message)
         self.message = message
         self.error = error
