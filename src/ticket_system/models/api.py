@@ -11,5 +11,5 @@ class ClassificationRequest(BaseModel):
 
 class ClassificationResponse(BaseModel):
     ticket_id: str = Field(..., examples=["TCK-001"])
-    urgency: Urgency = Field(..., examples=["Low"])
+    urgency: Urgency = Field(..., examples=["low"])
     department: Department = Field(..., examples=["Support"])
