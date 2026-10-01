@@ -11,11 +11,14 @@ from ticket_system.services import (
 
 app = FastAPI()
 
+@app.get("/health")
+def api_health():
+    return {"status": "ok"}
+
 @app.post("/ticket/classify", response_model=ClassificationResponse)
 def classify_ticket_endpoint(payload: ClassificationRequest):
     try:
         classification = classify_ticket(payload.text)
-        print ("\n\n---\n\n",classification,"\n\n---\n\n")
         return ClassificationResponse(
             ticket_id=payload.ticket_id,
             department=classification.department,
